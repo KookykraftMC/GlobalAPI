@@ -2,6 +2,7 @@ package com.kookykraftmc.api.global.data;
 
 import com.google.common.base.Joiner;
 
+import com.kookykraftmc.api.global.plugin.KookyHubObject;
 import com.kookykraftmc.api.global.sql.SQLConnection;
 import com.kookykraftmc.api.global.sql.SQLUtil;
 
@@ -60,6 +61,21 @@ public class DataObject {
     protected void check(String indentifier) throws InvalidBaseException {
         if (!getRaw().containsKey(indentifier)) {
             throw new InvalidBaseException("Could not find raw data: " + indentifier);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public void save(String table, String var, Object object) throws SQLException, ClassNotFoundException {
+        SQLConnection connection = KookyHubObject.getInstance().getConnection();
+        connection.executeSQL("DELETE FROM `" + table + "` WHERE " + new SQLUtil.WhereVar(var, object).getWhere());
+        String preset = "INSERT INTO `" + table + "` (`" + var + "`,`key`,`value`) VALUES ";
+        Set<String> stringSet = new HashSet<>();
+        for (Map.Entry<String, String> stringEntry : getRaw().entrySet()) {
+            stringSet.add("('" + object + "','" + stringEntry.getKey() + "','" + stringEntry.getValue() + "')");
+        }
+        String insert = Joiner.on(",").join(stringSet) + ";";
+        if (stringSet.size() > 0) {
+            connection.executeSQL(preset + insert);
         }
     }
 

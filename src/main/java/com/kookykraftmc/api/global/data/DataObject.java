@@ -1,11 +1,7 @@
 package com.kookykraftmc.api.global.data;
 
 import com.google.common.base.Joiner;
-
-<<<<<<< HEAD
 import com.kookykraftmc.api.global.plugin.KookyHubObject;
-=======
->>>>>>> 187b79df795d01158e123f10ffd5bc31d351452a
 import com.kookykraftmc.api.global.sql.SQLConnection;
 import com.kookykraftmc.api.global.sql.SQLUtil;
 

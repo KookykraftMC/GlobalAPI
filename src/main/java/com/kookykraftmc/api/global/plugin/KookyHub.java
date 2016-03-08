@@ -196,7 +196,7 @@ public abstract class KookyHub<KookyPlugin> implements FileUpdater {
         if (!sqlpropertiesfile.exists()) {
 
             try {
-                PropertiesFile.generateFresh(sqlpropertiesfile, new String[]{"hostname", "port", "username", "password", "database"}, new String[]{"localhost", "3306", "root", "NONE", "bubbleserver"});
+                PropertiesFile.generateFresh(sqlpropertiesfile, new String[]{"hostname", "port", "username", "password", "database"}, new String[]{"localhost", "3306", "root", "NONE", "kookyserver"});
             } catch (Exception e) {
                 getLogger().log(Level.WARNING, "Could not generate fresh properties file");
             }

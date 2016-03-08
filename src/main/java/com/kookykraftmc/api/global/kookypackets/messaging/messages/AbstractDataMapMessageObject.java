@@ -1,6 +1,6 @@
 package com.kookykraftmc.api.global.kookypackets.messaging.messages;
 
-import com.kookykraftmc.api.global.plugin.KookyHubObject;
+import com.kookykraftmc.api.global.plugin.KookyHub;
 import com.kookykraftmc.api.global.kookypackets.messaging.AbstractMessageObject;
 
 import com.google.common.io.ByteArrayDataInput;
@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 
 public abstract class AbstractDataMapMessageObject extends AbstractMessageObject implements DataMessage {
 
@@ -34,8 +35,8 @@ public abstract class AbstractDataMapMessageObject extends AbstractMessageObject
                     String value = in.readUTF();
                     data.put(key, value);
                 } catch (Exception e) {
-                    KookyHubObject.getInstance().logSevere(e.getMessage());
-                    KookyHubObject.getInstance().logSevere("Failed to proccess map object");
+                    KookyHub.getInstance().getLogger().log(Level.SEVERE, e.getMessage());
+                    KookyHub.getInstance().getLogger().log(Level.SEVERE, "Failed to proccess map object");
                     break;
                 }
             }

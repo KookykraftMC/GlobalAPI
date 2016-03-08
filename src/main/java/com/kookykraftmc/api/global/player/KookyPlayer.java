@@ -2,12 +2,13 @@ package com.kookykraftmc.api.global.player;
 
 import com.kookykraftmc.api.global.data.InvalidBaseException;
 import com.kookykraftmc.api.global.data.PlayerData;
-import com.kookykraftmc.api.global.plugin.KookyHubObject;
+import com.kookykraftmc.api.global.plugin.KookyHub;
 import com.kookykraftmc.api.global.ranks.Rank;
 
 import de.mickare.xserver.util.ChatColor;
 import com.google.common.base.Joiner;
 import java.util.*;
+import java.util.logging.Level;
 
 public abstract class KookyPlayer<T> {
 
@@ -48,7 +49,7 @@ public abstract class KookyPlayer<T> {
     @SuppressWarnings("unchecked")
     public T getPlayer() {
         if (player == null) {
-            player = (T) (KookyHubObject.getInstance().getPlayer(getUUID()));
+            player = (T) (KookyHub.getInstance().getPlayer(getUUID()));
         }
         return player;
     }
@@ -62,7 +63,7 @@ public abstract class KookyPlayer<T> {
         try {
             s = getRankString();
         } catch (InvalidBaseException e) {
-            KookyHubObject.getInstance().logSevere(e.getMessage());
+            KookyHub.getInstance().getLogger().log(Level.SEVERE, e.getMessage());
             return Rank.getDefault();
         }
         return Rank.getRank(s);

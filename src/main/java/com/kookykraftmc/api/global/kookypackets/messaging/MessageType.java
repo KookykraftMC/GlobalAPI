@@ -1,10 +1,11 @@
 package com.kookykraftmc.api.global.kookypackets.messaging;
 
-import com.kookykraftmc.api.global.plugin.KookyHubObject;
+import com.kookykraftmc.api.global.plugin.KookyHub;
 
 import java.lang.reflect.Constructor;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class MessageType {
 
@@ -15,7 +16,7 @@ public class MessageType {
         }
         type = new MessageType(clazz.getName(), clazz);
         typeSet.add(type);
-        KookyHubObject.getInstance().logInfo("Registered PacketType " + type.getName());
+        KookyHub.getInstance().getLogger().log(Level.INFO, "Registered PacketType " + type.getName());
         return type;
     }
 

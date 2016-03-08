@@ -14,16 +14,17 @@ package com.kookykraftmc.api.global.type;
  * Project: GlobalAPI
  */
 
-import com.kookykraftmc.api.global.plugin.KookyHubObject;
+import com.kookykraftmc.api.global.plugin.KookyHub;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Level;
 
 public class ServerType {
 
     public static ServerType registerType(ServerType type) {
         types.add(type);
-        KookyHubObject.getInstance().logInfo("Registered servertype: " + type.getName());
+        KookyHub.getInstance().getLogger().log(Level.INFO, "Registered servertype: " + type.getName());
         return type;
     }
 
